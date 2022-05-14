@@ -17,8 +17,12 @@
       <img id="imageSrc" alt="No Image" hidden />
       <div class="caption">Upload File: <input type="file" id="fileInput" name="file" /></div>
     </div>
-    <div><br>
+    <div><br><hr>
+      <br>
+      <label for="Kernel Size">Kernel Size:</label> <input name="Kernel Size" value="3" type="range" id="kernel" min="3" max="101" step="2" oninput="document.getElementById('ker').innerHTML = document.getElementById('kernel').value">&nbsp;<span id="ker"></span>
+      <br><br>
       <input class="upload" type="button" value="Load Img" onclick="processImg()"><br>
+      <br>
       <canvas id="canvasOutput" width="90%" style="border:1px solid #d3d3d3;">
     </div>
   </div>
@@ -30,6 +34,8 @@
     }, false);
 
     function processImg() {
+      let kernel = parseInt(document.getElementById('kernel').value);
+
       //loads image
       let src = cv.imread(imageSrc);
       console.log('image width: ' + src.cols + '\n' +
@@ -42,7 +48,7 @@
       let grey_img = new cv.Mat();   //stores greyImg
       let invert_img = new cv.Mat(); //storesInvert img
 
-      let ksize = new cv.Size(13, 13);
+      let ksize = new cv.Size(kernel, kernel);
       let blur_img = new cv.Mat();
       let invblur_img = new cv.Mat();
 
@@ -64,7 +70,8 @@
       cv.GaussianBlur(invert_img, blur_img, ksize, 0, 0, cv.BORDER_DEFAULT)
       cv.bitwise_not(blur_img, invblur_img)
       cv.divide(grey_img, invblur_img, sketch_img, scale = 256.0)
-      cv.resize(sketch_img, sketch_img, sketch_size, 0, 0, cv.INTER_AREA)
+      cv.resize(sketch_img, sketch_img, sketch_size, 0, 0, cv.INTER_AREA);
+      //cv.dilate(sketch_img,sketch_img,ksize);
       cv.imshow(canvasOutput, sketch_img);
 
       src.delete();
