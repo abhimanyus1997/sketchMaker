@@ -6,20 +6,20 @@
   <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
   <meta name="color-scheme" content="light dark">
   <script async src="js/opencv.js"></script>
-  <!-- <link rel="stylesheet" href="css/index.css"> -->
+  <link rel="stylesheet" href="css/style.css">
   <title>sketchMaker by abhimanyus1997</title>
 </head>
 
 <body>
-  <h2>sketchMaker by abhimanyus1997</h2>
-  <div>
+  <h2 style="text-align: center;font-family: sans-serif;">sketchMaker by abhimanyus1997</h2>
+  <div style="text-align: center; font-family: monospace;">
     <div class="inputoutput">
-      <img id="imageSrc" alt="No Image" hidden/>
-      <div class="caption">imageSrc <input type="file" id="fileInput" name="file" /></div>
+      <img id="imageSrc" alt="No Image" hidden />
+      <div class="caption">Upload File: <input type="file" id="fileInput" name="file" /></div>
     </div>
-    <div>
-      <input type="button" value="Load Img" onclick="processImg()">
-      <canvas id="canvasOutput" width="240" height="297" style="border:1px solid #d3d3d3;">
+    <div><br>
+      <input class="upload" type="button" value="Load Img" onclick="processImg()"><br>
+      <canvas id="canvasOutput" width="90%" style="border:1px solid #d3d3d3;">
     </div>
   </div>
   <script type="text/javascript">
@@ -30,23 +30,41 @@
     }, false);
 
     function processImg() {
+      //loads image
       let src = cv.imread(imageSrc);
-      let grey_img = new cv.Mat();   //stores greyImg
-      let invert_img =new cv.Mat(); //storesInvert img
+      console.log('image width: ' + src.cols + '\n' +
+        'image height: ' + src.rows + '\n' +
+        'image size: ' + src.size().width + '*' + src.size().height + '\n' +
+        'image depth: ' + src.depth() + '\n' +
+        'image channels ' + src.channels() + '\n' +
+        'image type: ' + src.type() + '\n');
 
-      let ksize = new cv.Size(11, 11);
+      let grey_img = new cv.Mat();   //stores greyImg
+      let invert_img = new cv.Mat(); //storesInvert img
+
+      let ksize = new cv.Size(13, 13);
       let blur_img = new cv.Mat();
       let invblur_img = new cv.Mat();
 
       let sketch_img = new cv.Mat();
+      let aspect_ratio = src.size().width / src.size().height;
+      let w = screen.Width;
+      let h = screen.Height;
+      let img_width = src.size().width;
+
+
+
+      let sketch_size = new cv.Size(480, 480 / aspect_ratio);
+
       // To distinguish the input and output, we graying the image.
       // You can try different conversions.
 
       cv.cvtColor(src, grey_img, cv.COLOR_RGBA2GRAY);
-      cv.bitwise_not(grey_img,invert_img)
-      cv.GaussianBlur(invert_img,blur_img,ksize, 0, 0, cv.BORDER_DEFAULT)
-      cv.bitwise_not(blur_img,invblur_img)
-      cv.divide(grey_img,invblur_img,sketch_img, scale=256.0)
+      cv.bitwise_not(grey_img, invert_img)
+      cv.GaussianBlur(invert_img, blur_img, ksize, 0, 0, cv.BORDER_DEFAULT)
+      cv.bitwise_not(blur_img, invblur_img)
+      cv.divide(grey_img, invblur_img, sketch_img, scale = 256.0)
+      cv.resize(sketch_img, sketch_img, sketch_size, 0, 0, cv.INTER_AREA)
       cv.imshow(canvasOutput, sketch_img);
 
       src.delete();
@@ -56,6 +74,7 @@
       invblur_img.delete();
       sketch_img.delete();
     }
+  
 
   </script>
 </body>
