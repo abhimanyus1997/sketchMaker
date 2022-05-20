@@ -1,5 +1,3 @@
-<!-- This is Single Page Static Webpage created for IPFS hosting need to be coded separatly -->
-
 <!DOCTYPE html>
 <html>
 
@@ -8,88 +6,88 @@
   <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
   <meta name="color-scheme" content="light dark">
   <script async src="https://docs.opencv.org/4.5.0/opencv.js"></script>
+  <!-- Latest compiled and minified CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Latest compiled JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Press+Start+2P&family=Megrim&family=Charmonman&family=Dawning+of+a+New+Day&family=Sofia&family=Special+Elite&display=swap"
+    rel="stylesheet">
   <style>
-    *,
-    *:before,
-    *:after {
-      -webkit-box-sizing: border-box;
-      -moz-box-sizing: border-box;
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      padding: 2rem 1.5rem;
-      font: 1rem/1.5 "PT Sans", Arial, sans-serif;
-      color: #eeedef;
-    }
-
-    .upload {
-      display: inline-block;
-      outline: 0;
-      border: 0;
-      cursor: pointer;
-      color: #fff;
-      font-weight: 500;
-      border-radius: 4px;
-      font-size: 14px;
-      height: 30px;
-      padding: 0px 15px;
-      text-shadow: rgb(0 0 0 / 25%) 0px 3px 8px;
-      background: linear-gradient(92.88deg, rgb(69, 94, 181) 9.16%, rgb(86, 67, 204) 43.89%, rgb(103, 63, 215) 64.72%);
-      transition: all 0.5s ease 0s;
-    }
-
-    .upload:hover {
-      box-shadow: rgb(80 63 205 / 50%) 0px 1px 40px;
-      transition: all 0.1s ease 0s;
-    }
-
-
-    #download {
-      display: inline-block;
-      outline: 0;
-      margin-top: auto;
-      border: 0;
-      cursor: pointer;
-      color: #fff;
-      font-weight: 500;
-      border-radius: 4px;
-      font-size: 14px;
-      height: 30px;
-      padding: 0px 15px;
-      text-shadow: rgb(0 0 0 / 25%) 0px 3px 8px;
-      background: linear-gradient(92.88deg, rgb(162, 69, 181) 9.16%, rgb(221, 41, 221) 43.89%, rgb(238, 4, 149) 64.72%);
-      transition: all 0.5s ease 0s;
-      text-decoration: none;
+    #canvasOutput {
+      border-radius: 20px;
+      background: linear-gradient(145deg, #c6303e, #eb394a);
+      box-shadow: 25px 25px 50px #96242f,
+        -25px -25px 50px #ff465b;
+      margin-inline-start: 40%;
     }
   </style>
+
   <title>sketchMaker by abhimanyus1997</title>
+  <link rel="shortcut icon" href="img/sketchMaker.png" type="image/png">
 </head>
 
-<body>
-  <h2 style="text-align: center;font-family: sans-serif;">sketchMaker by abhimanyus1997</h2>
-  <div style="text-align: center; font-family: monospace;">
-    <div class="inputoutput">
-      <img id="imageSrc" alt="No Image" hidden />
-      <div class="caption">Upload File: <input type="file" id="fileInput" name="file" /></div>
+<body style="background-color: #ff9900; font-family: 'Press Start 2P', cursive; font-size: 8px;">
+
+
+  <div class="container-fluid p-3 bg-dark text-white text-center">
+    <h1 style="font-family: 'Megrim', cursive; font-weight: bolder;">Sketcher by abhimanyus1997</h1>
+    <p style="font-family: 'Dawning of a New Day', cursive; font-size: 15px;">Created with 💖 in 🇮🇳</p>
+  </div>
+
+  <div class="mt-4 mb-5 p-3 container bg-danger text-light rounded  border shadow-lg">
+    <div class="row">
+      <div class="col justify-content-center">
+        <div class="fs-1 "></div>
+      </div>
     </div>
-    <div><br>
-      <hr>
-      <br>
-      <label for="Kernel Size">Kernel Size:</label>
-      <input name="Kernel Size" value="3" type="range" id="kernel" min="3" max="101" step="2"
-        oninput="document.getElementById('ker').innerHTML = document.getElementById('kernel').value">&nbsp;
-      <span id="ker"></span>
-      <br>
-      <br>
-      <input class="upload" type="button" value="Load Img" onclick="processImg()"><br>
-      <a id="download" download="sketchMaker.jpg" href="" onclick="download_img(this);">Save Image..</a>
-      <br><br>
-      <canvas id="canvasOutput" width="90%" style="border:1px solid #d3d3d3;">
-        <canvas id="canvasFullOutput">
+    <div class="row">
+      <div class="col mb-2">
+        <div class="inputoutput">
+          <img id="imageSrc" alt="No Image" hidden />
+          <div class="caption">Upload File: <input type="file" id="fileInput" name="file" /></div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="Kernel Size">Kernel Size:</label>
+        <input name="Kernel Size" value="3" type="range" id="kernel" min="3" max="101" step="2"
+          oninput="document.getElementById('ker').innerHTML = document.getElementById('kernel').value">&nbsp;
+      </div>
+      <div class="col" id="ker">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col ms-5 m-2 mb-4 mt-3">
+        <input class="btn btn-outline-light" style="font-size: 10px;" type="button" value="Load Img"
+          onclick="processImg()">
+      </div>
+      <div class="col m-2 mb-4 mt-3">
+        <a class="btn btn-outline-light" style="font-size: 10px;" id="download" download="sketcher.jpg" href=""
+          onclick="download_img(this);">Save Image..</a>
+      </div>
+    </div>
+    <div class="row ">
+      <div class="col">
+        <canvas id="canvasOutput" width="90%">
+          <canvas id="canvasFullOutput">
+      </div>
     </div>
   </div>
+
+  <!-- Footer -->
+  <footer class="page-footer font-small blue bg-dark text-white fixed-bottom">
+    <div class="footer-copyright text-center py-3">© 2022 Copyright:
+      <a href="https://github.com/abhimanyus1997"> abhimanyus1997</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+  <!-- Footer -->
+
   <script type="text/javascript">
     let imgElement = document.getElementById("imageSrc")
     let inputElement = document.getElementById("fileInput");
