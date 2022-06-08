@@ -1,4 +1,13 @@
+<<<<<<< HEAD
 body {
     background-color: #ff9900;
 
+=======
+
+body {
+    margin: 0;
+    padding: 2rem 1.5rem;
+    font: 1rem/1.5 "PT Sans", Arial, sans-serif;
+    color: #eeedef;
+>>>>>>> 21c5dc68e9cbef9303e9815b2e09e7513e4d4cf8
 }
