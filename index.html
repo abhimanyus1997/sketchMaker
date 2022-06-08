@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <script async src="https://docs.opencv.org/4.5.0/opencv.js"></script>
+<<<<<<< HEAD
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <!-- JavaScript Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+    crossorigin="anonymous"></script>
+
+=======
+  <!-- Latest compiled and minified CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Latest compiled JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+>>>>>>> 21c5dc68e9cbef9303e9815b2e09e7513e4d4cf8
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Press+Start+2P&family=Megrim&family=Charmonman&family=Dawning+of+a+New+Day&family=Sofia&family=Special+Elite&display=swap"
+    rel="stylesheet">
+<<<<<<< HEAD
+
+=======
+>>>>>>> 21c5dc68e9cbef9303e9815b2e09e7513e4d4cf8
+  <style>
+    #canvasOutput {
+      border-radius: 20px;
+      background: linear-gradient(145deg, #c6303e, #eb394a);
+      box-shadow: 25px 25px 50px #96242f,
+        -25px -25px 50px #ff465b;
+      margin-inline-start: 40%;
+    }
+  </style>
+
+<<<<<<< HEAD
+  <title>SketchMaker by abhimanyus1997</title>
+=======
+  <title>sketchMaker by abhimanyus1997</title>
+  <link rel="shortcut icon" href="img/sketchMaker.png" type="image/png">
+>>>>>>> 21c5dc68e9cbef9303e9815b2e09e7513e4d4cf8
+</head>
+
+<body style="background-color: #ff9900; font-family: 'Press Start 2P', cursive; font-size: 8px;">
+
+<<<<<<< HEAD
+  <div class="container-fluid p-3 bg-dark text-white text-center">
+    <h1 style="font-family: 'Megrim', cursive; font-weight: bolder;">SketchMaker by abhimanyus1997</h1>
+=======
+
+  <div class="container-fluid p-3 bg-dark text-white text-center">
+    <h1 style="font-family: 'Megrim', cursive; font-weight: bolder;">Sketcher by abhimanyus1997</h1>
+>>>>>>> 21c5dc68e9cbef9303e9815b2e09e7513e4d4cf8
+    <p style="font-family: 'Dawning of a New Day', cursive; font-size: 15px;">Created with 💖 in 🇮🇳</p>
+  </div>
+
+  <div class="mt-4 mb-5 p-3 container bg-danger text-light rounded  border shadow-lg">
+    <div class="row">
+      <div class="col justify-content-center">
+        <div class="fs-1 "></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col mb-2">
+        <div class="inputoutput">
+          <img id="imageSrc" alt="No Image" hidden />
+          <div class="caption">Upload File: <input type="file" id="fileInput" name="file" /></div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="Kernel Size">Kernel Size:</label>
+        <input name="Kernel Size" value="3" type="range" id="kernel" min="3" max="101" step="2"
+          oninput="document.getElementById('ker').innerHTML = document.getElementById('kernel').value">&nbsp;
+      </div>
+      <div class="col" id="ker">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col ms-5 m-2 mb-4 mt-3">
+        <input class="btn btn-outline-light" style="font-size: 10px;" type="button" value="Load Img"
+          onclick="processImg()">
+      </div>
+<<<<<<< HEAD
+      <div class="col ms-5 m-2 mb-4 mt-3">
+        <a class="btn btn-outline-light" style="font-size: 10px;" id="download" download="SketchMaker.jpg" href=""
+=======
+      <div class="col m-2 mb-4 mt-3">
+        <a class="btn btn-outline-light" style="font-size: 10px;" id="download" download="sketcher.jpg" href=""
+>>>>>>> 21c5dc68e9cbef9303e9815b2e09e7513e4d4cf8
+          onclick="download_img(this);">Save Image..</a>
+      </div>
+    </div>
+    <div class="row ">
+      <div class="col">
+        <canvas id="canvasOutput" width="90%">
+          <canvas id="canvasFullOutput">
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="page-footer font-small blue bg-dark text-white fixed-bottom">
+    <div class="footer-copyright text-center py-3">© 2022 Copyright:
+      <a href="https://github.com/abhimanyus1997"> abhimanyus1997</a>
+    </div>
+<<<<<<< HEAD
+=======
+    <!-- Copyright -->
+>>>>>>> 21c5dc68e9cbef9303e9815b2e09e7513e4d4cf8
+  </footer>
+  <!-- Footer -->
+
+  <script type="text/javascript">
+    let imgElement = document.getElementById("imageSrc")
+    let inputElement = document.getElementById("fileInput");
+    inputElement.addEventListener("change", (e) => {
+      imgElement.src = URL.createObjectURL(e.target.files[0]);
+    }, false);
+
+    function processImg() {
+      let kernel = parseInt(document.getElementById('kernel').value);
+
+      //loads image
+      let src = cv.imread(imageSrc);
+      console.log('image width: ' + src.cols + '\n' +
+        'image height: ' + src.rows + '\n' +
+        'image size: ' + src.size().width + '*' + src.size().height + '\n' +
+        'image depth: ' + src.depth() + '\n' +
+        'image channels ' + src.channels() + '\n' +
+        'image type: ' + src.type() + '\n');
+
+      let grey_img = new cv.Mat();   //stores greyImg
+      let invert_img = new cv.Mat(); //storesInvert img
+
+      let ksize = new cv.Size(kernel, kernel);
+      let blur_img = new cv.Mat();
+      let invblur_img = new cv.Mat();
+
+      let sketch_img = new cv.Mat();
+      let resized_sketch_img = new cv.Mat();
+      let aspect_ratio = src.size().width / src.size().height;
+      let w = screen.Width;
+      let h = screen.Height;
+      let img_width = src.size().width;
+
+
+
+      let sketch_size = new cv.Size(480, 480 / aspect_ratio);
+
+      // To distinguish the input and output, we graying the image.
+      // You can try different conversions.
+
+      cv.cvtColor(src, grey_img, cv.COLOR_RGBA2GRAY);
+      cv.bitwise_not(grey_img, invert_img)
+      cv.GaussianBlur(invert_img, blur_img, ksize, 0, 0, cv.BORDER_DEFAULT)
+      cv.bitwise_not(blur_img, invblur_img)
+      cv.divide(grey_img, invblur_img, sketch_img, scale = 256.0)
+      cv.resize(sketch_img, resized_sketch_img, sketch_size, 0, 0, cv.INTER_AREA);
+      //cv.dilate(sketch_img,sketch_img,ksize);
+      cv.imshow(canvasOutput, resized_sketch_img);
+      cv.imshow(canvasFullOutput, sketch_img);
+
+      src.delete();
+      grey_img.delete();
+      invert_img.delete();
+      blur_img.delete();
+      invblur_img.delete();
+      sketch_img.delete();
+      resized_sketch_img.delete();
+
+
+    }
+
+    download_img = function (el) {
+      var canvas = document.getElementById("canvasFullOutput");
+      var image = canvas.toDataURL("image/jpg");
+      el.href = image;
+    };
+  </script>
+</body>
+
+</html>
